@@ -1,18 +1,19 @@
 import axios from 'axios'
 
-const handleAuth = async (username, password) => {
+export const handleAuth = async (username, password) => {
     try {
         const payload = {
             username: username,
-            password: password,
+            password: password
         }
-        const response = await axios.post('https://photoexplorernp.com/api/v1/auth', payload
-        )
+        const baseURL = process.env.REACT_APP_BASE_URL;
+        const response= await axios.post(`${baseURL}/auth/login`, payload)
+        if(response.status ===200){
+            localStorage.setItem("token", response.data.token)
+        }
         return response.data.token;
     }
     catch (error){
         throw error.response.data.message;
     }
 }
-
-export default handleAuth;

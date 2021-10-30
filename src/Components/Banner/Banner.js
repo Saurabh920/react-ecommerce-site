@@ -13,8 +13,8 @@ const Banner = () => {
         setIndex(selectedIndex);
     };
     return (
-        <Carousel activeIndex={index} onSelect={handleSelect}>
-        <Carousel.Item interval={100}  style={{height: '37rem'}}>
+        <Carousel activeIndex={index} onSelect={handleSelect} fade>
+        <Carousel.Item interval={1500}  style={{height: '37rem'}}>
             <img
             className="d-block w-100"
             src={One}
@@ -38,7 +38,7 @@ const Banner = () => {
             <p>Ipsum consequat eiusmod deserunt Lorem ipsum elit.</p>
             </Carousel.Caption>
         </Carousel.Item>
-        <Carousel.Item interval={800} style={{height: '37rem'}}>
+        <Carousel.Item interval={500} style={{height: '37rem'}}>
             <img
             className="d-block w-100"
             src={Three}
@@ -50,7 +50,7 @@ const Banner = () => {
             <p>Qui magna veniam proident adipisicing deserunt.</p>
             </Carousel.Caption>
         </Carousel.Item>
-        <Carousel.Item interval={800} style={{height: '37rem'}}>
+        <Carousel.Item interval={500} style={{height: '37rem'}}>
             <img
             className="d-block w-100"
             src={Four}
@@ -62,7 +62,7 @@ const Banner = () => {
             <p>Laboris ullamco velit pariatur aute mollit magna commodo laboris.</p>
             </Carousel.Caption>
         </Carousel.Item>
-        <Carousel.Item interval={800} style={{height: '37rem'}}>
+        <Carousel.Item interval={500} style={{height: '37rem'}}>
             <img
             className="d-block w-100"
             src={Five}

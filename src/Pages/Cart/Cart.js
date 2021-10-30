@@ -1,17 +1,26 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {Table, Button, Image} from 'react-bootstrap'
-import Products from '../../Assets/Images/Products/products.jpg';
 import {AiFillDelete} from "react-icons/ai";
 import CheckOut from "../../Assets/Images/CheckOut/checkout.png"
 import { Link } from 'react-router-dom';
+import { getProduct } from '../../Store/Actions/Products/productAction';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Cart = () => {
-const [counter, setCounter] = useState(1);
-  const incrementCounter = () => setCounter(counter + 1);
-  let decrementCounter = () => setCounter(counter - 1);
-  if(counter===0) {
-    decrementCounter = () => setCounter(1);
+const [counterone, setCounterOne] = useState(1);
+const [countertwo, setCounterTwo] = useState(1);
+  if(counterone===0) {
+    setCounterOne(1);
 }
+    if(countertwo===0) {
+    setCounterTwo(1);
+    }
+
+const dispatch = useDispatch();
+useEffect(() => {
+    dispatch(getProduct());
+}, [])
+const {product} = useSelector((state) => state.productReducer);
     return (
         <>
         <Table borderless hover>
@@ -25,40 +34,41 @@ const [counter, setCounter] = useState(1);
             <th width="80px">Remove</th>
             </tr>
         </thead>
+        {product.slice(6,7).map((data, index) => (
         <tbody>
             <tr>
             <td>1</td>
-            <th style={{textAlign: 'center'}}><Image src={Products} rounded style={{height: '180px', width: '180px'}}/>
+            <th style={{textAlign: 'center'}}><Image src={data.image} rounded style={{height: '180px', width: '180px'}}/>
             <br/>
-            Title
+            {data.title}
             </th>
-            <td>Amet mollit ullamco nulla voluptate laborum irure qui occaecat laborum labore. Occaecat exercitation sit sunt ex aliqua quis sunt ea amet. Consectetur mollit magna adipisicing aliquip sit ipsum elit velit anim. Ex sit officia aliquip nostrud exercitation ea reprehenderit mollit exercitation aute consequat. Proident culpa non aliquip ut occaecat.</td>
+            <td>{data.description}</td>
             <td>
-            <Button variant="danger" onClick={decrementCounter} style={{marginRight:'1rem', borderRadius: '25px 0 0 25px'}}>-</Button>
-            {counter}
-            <Button variant="success" onClick={incrementCounter} style={{marginLeft:'1rem', borderRadius: '0 25px 25px 0'}}>+</Button>
+            <Button variant="danger" onClick={() => setCounterOne(counterone - 1)} style={{marginRight:'1rem', borderRadius: '25px 0 0 25px'}}>-</Button>
+            {counterone}
+            <Button variant="success" onClick={() => setCounterOne(counterone + 1)} style={{marginLeft:'1rem', borderRadius: '0 25px 25px 0'}}>+</Button>
             <br/>
             <br/>
             </td>
-            <td>Npr. XXXXXX</td>
-            <td><Button variant="danger" style={{borderRadius: '25px', width: '3rem'}}><AiFillDelete/></Button></td>
+            <td>${data.price}</td>
+            <td><Button variant="danger" style={{borderRadius: '25px', width: '3rem'}} onClick={() => setCounterOne(0)}><AiFillDelete/></Button></td>
             </tr>
             <tr>
             <td>2</td>
-            <th style={{textAlign: 'center'}}><Image src={Products} rounded style={{height: '180px', width: '180px'}}/>
+            <th style={{textAlign: 'center'}}><Image src={data.image} rounded style={{height: '180px', width: '180px'}}/>
             <br/>
-            Title
+            {data.title}
             </th>
-            <td>Amet mollit ullamco nulla voluptate laborum irure qui occaecat laborum labore. Occaecat exercitation sit sunt ex aliqua quis sunt ea amet. Consectetur mollit magna adipisicing aliquip sit ipsum elit velit anim. Ex sit officia aliquip nostrud exercitation ea reprehenderit mollit exercitation aute consequat. Proident culpa non aliquip ut occaecat.</td>
+            <td>{data.description}</td>
             <td>
-            <Button variant="danger" onClick={decrementCounter} style={{marginRight:'1rem', borderRadius: '25px 0 0 25px'}}>-</Button>
-            {counter}
-            <Button variant="success" onClick={incrementCounter} style={{marginLeft:'1rem', borderRadius: '0 25px 25px 0'}}>+</Button>
+            <Button variant="danger" onClick={() => setCounterTwo(countertwo - 1)} style={{marginRight:'1rem', borderRadius: '25px 0 0 25px'}}>-</Button>
+            {countertwo}
+            <Button variant="success" onClick={() => setCounterTwo(countertwo + 1)} style={{marginLeft:'1rem', borderRadius: '0 25px 25px 0'}}>+</Button>
             <br/>
             <br/>
             </td>
-            <td>Npr. XXXXXX</td>
-            <td><Button variant="danger" style={{borderRadius: '25px', width: '3rem'}}><AiFillDelete/></Button></td>
+            <td>${data.price}</td>
+            <td><Button variant="danger" style={{borderRadius: '25px', width: '3rem'}} onClick={() => setCounterTwo(0)}><AiFillDelete/></Button></td>
             </tr>
             <tr>
             <td></td>
@@ -85,6 +95,7 @@ const [counter, setCounter] = useState(1);
             </tr>
             
         </tbody>
+        ))}
         </Table>
         </>
     )

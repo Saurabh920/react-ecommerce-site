@@ -1,0 +1,9 @@
+.proimg img {
+    transition: 0.3s ease-in-out;
+}
+.proimg img:hover {
+    transition: 0.2s ease-in-out;
+    transform: scale(1.1);
+    cursor: pointer;
+    
+}

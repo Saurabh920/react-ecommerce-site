@@ -1,32 +1,61 @@
-import React from 'react'
-import {Card, Button, Col, Row} from 'react-bootstrap';
-import Product from '../../Assets/Images/Products/products.jpg'
+import React, { useState, useEffect } from 'react'
+import {Card, Button, Col, Row, Modal, Spinner} from 'react-bootstrap';
 import ShoppingCartTwoToneIcon from '@mui/icons-material/ShoppingCartTwoTone';
+import { getProduct } from '../../Store/Actions/Products/productAction';
+import { useDispatch, useSelector } from 'react-redux';
+import "./Products.css"
 
 const Products = () => {
+    const [show, setShow] = useState(false)
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getProduct());
+    }, [])
+    const {loading, product} = useSelector((state) => state.productReducer);
     return (
         <>
-            <h1 style={{textAlign: 'center', marginTop: '20px'}}>Products</h1>
-            <div style={{margin: '5%'}}>
-            <Row md={3} className="g-4">
-            {Array.from({ length: 9 }).map((_, idx) => (
-                <Col>
-                <Card style={{ width: '20rem', margin: 'auto'}}>
-                <Card.Img variant="top" src={Product} style={{height: '15rem'}} />
-                <Card.Body>
-                    <Card.Title style={{fontFamily: 'Montserrat, sans-serif', textAlign: 'center'}}>Title</Card.Title>
-                    <h6>Npr. XXXXXX /-</h6>
-                    <Card.Text >
-                    Eu aute eu occaecat amet nulla ipsum eu quis. Cupidatat pariatur culpa.
-                    </Card.Text>
-                    <Button className="w-100" variant='success' style={{borderRadius: '25px'}}><ShoppingCartTwoToneIcon/>ADD TO CART</Button>
-                </Card.Body>
-                </Card>
-                </Col>
-                ))}
+            <h1 className="text-center" style={{marginTop: '2rem'}}>Products</h1>
+            <div style={{margin: '2rem 5.5rem'}} className="proimg">
+                {loading?(
+                    <div className="container">
+                    <h4 style={{textAlign: "center"}}>Loading... <Spinner animation="border" variant="success" /></h4>
+                    </div>
+                    
+                ):(
+                <Row md={4} className="g-4">
+                    {product.map((data, idx) => (
+                        <Col>
+                            <Card style={{ width: '18rem', margin: 'auto'}}>
+                            <img variant="top" src={data.image} className="proimg" alt="" style={{height: '13rem', width: '15rem', margin: '20px'}} onClick={() => setShow(true)}/>
+                            <Card.Body>
+                                <Card.Title style={{fontFamily: 'Montserrat, sans-serif', textAlign: 'center', maxHeight: "1.5rem", overflow: "hidden", whiteSpace: 'nowrap', textOverflow: 'ellipsis'}}>{data.title}</Card.Title>
+                                <Card.Text><strong>Price: </strong>${data.price}</Card.Text>
+                                <Card.Text style={{overflow: "hidden", whiteSpace: 'nowrap', textOverflow: 'ellipsis'}}>{data.description}</Card.Text>
+                                <Button className="w-100" variant='success' style={{borderRadius: '25px'}}>ADD TO CART<ShoppingCartTwoToneIcon style={{height: '1rem', marginTop: '-2.5px'}}/></Button>
+                            </Card.Body>
+                            </Card>
+                        </Col>
+                    ))}
                 </Row>
-                </div>
+                )}
+            
+            </div>
+            <Modal
+                show={show}
+                onHide={() => setShow(false)}
+                size="lg"
+                dialogClassName="modal-90w"
+                aria-labelledby="example-custom-modal-styling-title"
+                centered
+            >
+                <Modal.Header closeButton>
+                </Modal.Header>
+                <Modal.Body>
+                <img src={product.image} alt="" style={{height: '80vh', width: '100%'}} />
+                </Modal.Body>
+            </Modal>
         </>
+
     )
 }
 

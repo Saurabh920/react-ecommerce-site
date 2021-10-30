@@ -1,17 +1,37 @@
 import React, { useState, useEffect } from 'react'
-import {Card, Button, Col, Row, Modal, Spinner} from 'react-bootstrap';
+import {Card, Button, Col, Row, Spinner} from 'react-bootstrap';
 import ShoppingCartTwoToneIcon from '@mui/icons-material/ShoppingCartTwoTone';
 import { getProduct } from '../../Store/Actions/Products/productAction';
 import { useDispatch, useSelector } from 'react-redux';
 import "./Products.css"
+import Modals from "../Modal/Modal"
+import { addCart } from '../../Store/Actions/CartProducts/cartAction';
 
 const Products = () => {
-    const [show, setShow] = useState(false)
+    const [cartProducts, setCartProducts] = useState([])
+    const [modalShow, setModalShow] = useState(false)
+    const modal = (image) => {
+        setModalShow(true);
+    }
+    
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getProduct());
     }, [])
     const {loading, product} = useSelector((state) => state.productReducer);
+
+    const addToCart = (id ,image, description, price) => {
+        let payload = {
+            productId: id,
+            image: image,
+            description: description,
+            price: price,
+        }
+        let items = [...cartProducts];
+        items.push(payload);
+        setCartProducts(items)
+        dispatch(addCart(items));
+    }
     return (
         <>
             <h1 className="text-center" style={{marginTop: '2rem'}}>Products</h1>
@@ -23,15 +43,15 @@ const Products = () => {
                     
                 ):(
                 <Row md={4} className="g-4">
-                    {product.map((data, idx) => (
+                    {product.map((product, idx) => (
                         <Col>
                             <Card style={{ width: '18rem', margin: 'auto'}}>
-                            <img variant="top" src={data.image} className="proimg" alt="" style={{height: '13rem', width: '15rem', margin: '20px'}} onClick={() => setShow(true)}/>
+                            <img variant="top" src={product.image} className="proimg" alt="" style={{height: '13rem', width: '15rem', margin: '20px'}} onClick={modal.bind(null, product.image)}/>
                             <Card.Body>
-                                <Card.Title style={{fontFamily: 'Montserrat, sans-serif', textAlign: 'center', maxHeight: "1.5rem", overflow: "hidden", whiteSpace: 'nowrap', textOverflow: 'ellipsis'}}>{data.title}</Card.Title>
-                                <Card.Text><strong>Price: </strong>${data.price}</Card.Text>
-                                <Card.Text style={{overflow: "hidden", whiteSpace: 'nowrap', textOverflow: 'ellipsis'}}>{data.description}</Card.Text>
-                                <Button className="w-100" variant='success' style={{borderRadius: '25px'}}>ADD TO CART<ShoppingCartTwoToneIcon style={{height: '1rem', marginTop: '-2.5px'}}/></Button>
+                                <Card.Title style={{fontFamily: 'Montserrat, sans-serif', textAlign: 'center', maxHeight: "1.5rem", overflow: "hidden", whiteSpace: 'nowrap', textOverflow: 'ellipsis'}}>{product.title}</Card.Title>
+                                <Card.Text><strong>Price: </strong>${product.price}</Card.Text>
+                                <Card.Text style={{overflow: "hidden", whiteSpace: 'nowrap', textOverflow: 'ellipsis'}}>{product.description}</Card.Text>
+                                <Button className="w-100" variant='success' style={{borderRadius: '25px'}} onClick={addToCart.bind(null, product.id, product.image, product.description, product.price)}>ADD TO CART<ShoppingCartTwoToneIcon style={{height: '1rem', marginTop: '-2.5px'}}/></Button>
                             </Card.Body>
                             </Card>
                         </Col>
@@ -40,20 +60,7 @@ const Products = () => {
                 )}
             
             </div>
-            <Modal
-                show={show}
-                onHide={() => setShow(false)}
-                size="lg"
-                dialogClassName="modal-90w"
-                aria-labelledby="example-custom-modal-styling-title"
-                centered
-            >
-                <Modal.Header closeButton>
-                </Modal.Header>
-                <Modal.Body>
-                <img src={product.image} alt="" style={{height: '80vh', width: '100%'}} />
-                </Modal.Body>
-            </Modal>
+            <Modals show={modalShow} onHide={() => setModalShow(false)} product={product}/>
         </>
 
     )

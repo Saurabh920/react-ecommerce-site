@@ -7,8 +7,11 @@ import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
 import logo from '../../Assets/Images/Logo/logo.png'
 import './AnotherNavbar.css'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux';
 
 const AnotherNavbar = () => {
+    const {addedCartItems} = useSelector((state) => state.cartReducer);
+    const numberOfItemsInCart = (addedCartItems.length)
     return (
         <>
         <Navbar className="sticky-top" collapseOnSelect expand="lg" bg="light" variant="light">
@@ -31,7 +34,7 @@ const AnotherNavbar = () => {
                     <Nav className="ms-auto">
                         <Nav.Link as={Link} to="/login"><AccountCircleOutlinedIcon/>Login/Register</Nav.Link>
                         <Nav.Link as={Link} to="/cart">
-                            <Badge color="success" badgeContent={2} showZero>
+                            <Badge color="success" badgeContent={numberOfItemsInCart} showZero>
                             <ShoppingCartTwoToneIcon/>
                             </Badge>
                         </Nav.Link>

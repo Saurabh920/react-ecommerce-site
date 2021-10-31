@@ -13,7 +13,7 @@ const Banner = () => {
         setIndex(selectedIndex);
     };
     return (
-        <Carousel activeIndex={index} onSelect={handleSelect} fade>
+        <Carousel activeIndex={index} onSelect={handleSelect}>
         <Carousel.Item interval={1500}  style={{height: '37rem'}}>
             <img
             className="d-block w-100"

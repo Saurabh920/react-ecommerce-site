@@ -51,12 +51,12 @@ export default function Footer() {
 
             <ul className='list-unstyled'>
               <li>
-                <a href='#!' className='text-black'>
+                <a href='https://www.facebook.com/saurabhsinghthakuri920/' className='text-black'>
                 <i class="fab fa-facebook"></i>
                 </a>
               </li>
               <li>
-                <a href='#!' className='text-black'>
+                <a href='https://www.instagram.com/saurabhsinghthakuri/' className='text-black'>
                 <i class="fab fa-instagram"></i>
                 </a>
               </li>

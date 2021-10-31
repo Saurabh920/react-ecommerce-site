@@ -1,27 +1,37 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import {Table, Button, Image, Spinner} from 'react-bootstrap'
 import {AiFillDelete} from "react-icons/ai";
 import CheckOut from "../../Assets/Images/CheckOut/checkout.png"
 import { Link } from 'react-router-dom';
-// import { getProduct } from '../../Store/Actions/Products/productAction';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCart } from '../../Store/Actions/CartProducts/cartAction';
+import { getCart, removeCart } from '../../Store/Actions/CartProducts/cartAction';
 
 const Cart = () => {
 const [counterone, setCounterOne] = useState(1);
-const [countertwo, setCounterTwo] = useState(1);
   if(counterone===0) {
     setCounterOne(1);
 }
-    if(countertwo===0) {
-    setCounterTwo(1);
-    }
 
 const dispatch = useDispatch();
-useEffect(() => {
-    dispatch(getCart());
-}, [])
-const {loading, addedCartItems} = useSelector((state) => state.cartReducer);
+// useEffect(() => {
+//     dispatch(getCart());
+// }, [])
+
+// const [cartProducts, setCartProducts] = useState([])
+const removeFromCart = () => {
+    // id, image, description, price
+    // let payload = {
+        // productId: id,
+    //     image: image,
+    //     description: description,
+    //     price: price,
+    // }
+    // let items = [...cartProducts];
+    // items.push(payload);
+    // setCartProducts(items)
+    dispatch(removeCart(addedCartItems))
+}
+const {loading, addedCartItems } = useSelector((state) => state.cartReducer);
     return (
         <>
         <Table borderless hover>
@@ -59,7 +69,7 @@ const {loading, addedCartItems} = useSelector((state) => state.cartReducer);
                 <br/>
                 </td>
                 <td>${data.price}</td>
-                <td><Button variant="danger" style={{borderRadius: '25px', width: '3rem'}} onClick={() => setCounterOne(0)}><AiFillDelete/></Button></td>
+                <td><Button variant="danger" style={{borderRadius: '25px', width: '3rem'}} onClick={removeFromCart}><AiFillDelete/></Button></td>
             </tr>
         ))}
             <tr>

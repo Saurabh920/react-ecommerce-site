@@ -43,16 +43,16 @@ const Products = () => {
                     
                 ):(
                 <Row md={4} className="g-4">
-                    {product.map((product, idx) => (
-                        <Col>
+                    {product.map((product, index) => (
+                        <Col key={index}>
                             <Card style={{ width: '18rem', margin: 'auto'}}>
                             <img variant="top" src={product.image} className="proimg" alt="" style={{height: '13rem', width: '15rem', margin: '20px'}} onClick={modal.bind(null, product.image)}/>
-                            <Card.Body>
-                                <Card.Title style={{fontFamily: 'Montserrat, sans-serif', textAlign: 'center', maxHeight: "1.5rem", overflow: "hidden", whiteSpace: 'nowrap', textOverflow: 'ellipsis'}}>{product.title}</Card.Title>
-                                <Card.Text><strong>Price: </strong>${product.price}</Card.Text>
-                                <Card.Text style={{overflow: "hidden", whiteSpace: 'nowrap', textOverflow: 'ellipsis'}}>{product.description}</Card.Text>
-                                <Button className="w-100" variant='success' style={{borderRadius: '25px'}} onClick={addToCart.bind(null, product.id, product.image, product.description, product.price)}>ADD TO CART<ShoppingCartTwoToneIcon style={{height: '1rem', marginTop: '-2.5px'}}/></Button>
-                            </Card.Body>
+                                <Card.Body>
+                                    <Card.Title style={{fontFamily: 'Montserrat, sans-serif', textAlign: 'center', maxHeight: "1.5rem", overflow: "hidden", whiteSpace: 'nowrap', textOverflow: 'ellipsis'}}>{product.title}</Card.Title>
+                                    <Card.Text><strong>Price: </strong>${product.price}</Card.Text>
+                                    <Card.Text style={{overflow: "hidden", whiteSpace: 'nowrap', textOverflow: 'ellipsis'}}>{product.description}</Card.Text>
+                                    <Button className="w-100" variant='success' style={{borderRadius: '25px'}} onClick={addToCart.bind(null, product.id, product.image, product.description, product.price)}>ADD TO CART<ShoppingCartTwoToneIcon style={{height: '1rem', marginTop: '-2.5px'}}/></Button>
+                                </Card.Body>
                             </Card>
                         </Col>
                     ))}

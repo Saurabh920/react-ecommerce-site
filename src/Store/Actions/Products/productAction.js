@@ -1,5 +1,7 @@
-import axios from "axios"
+// import axios from "axios"
+import axiosInstance from "../../../Api/Axios"
 import * as productActionTypes from "../Products/productTypes"
+
 
 
 export const getProduct = () => {
@@ -8,7 +10,7 @@ export const getProduct = () => {
             dispatch({
                 type: productActionTypes.GET_PRODUCT_START
             })
-            const response = await axios.get('https://fakestoreapi.com/products');
+            const response = await axiosInstance.get(`/products`);
             if (response.status ===200) {
                 dispatch({
                     type: productActionTypes.GET_PRODUCT_SUCCESS,

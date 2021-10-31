@@ -38,3 +38,18 @@ export const addCart = (product) => {
         }
     }
 }
+
+export const removeCart = (product) => {
+    return async(dispatch) => {
+        try {
+            dispatch({
+                type: cartActionTypes.REMOVE_CART_SUCCESS,
+                payload: product
+            })
+        } catch (error) {
+            dispatch({
+                type: cartActionTypes.REMOVE_CART_ERROR
+            })
+        }
+    }
+}

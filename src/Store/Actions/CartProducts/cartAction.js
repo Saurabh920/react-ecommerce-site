@@ -1,27 +1,27 @@
-import axios from 'axios'
 import * as cartActionTypes from "./cartTypes"
+// import axiosInstance from "../../../Api/Axios"
 
 
-export const getCart = () => {
-    return async(dispatch) => {
-        try {
-            dispatch({
-                type: cartActionTypes.GET_CART_START
-            })
-            const response = await axios.get('https://fakestoreapi.com/carts');
-            if (response.status === 200) {
-                dispatch({
-                    type: cartActionTypes.GET_CART_SUCCESS,
-                    payload: response.data
-                })
-            }
-        } catch (error) {
-            dispatch({
-                type: cartActionTypes.GET_CART_ERROR
-            })
-        }
-    }
-}
+// export const getCart = () => {
+//     return async(dispatch) => {
+//         try {
+//             dispatch({
+//                 type: cartActionTypes.GET_CART_START
+//             })
+//             const response = await axiosInstance.get('/carts');
+//             if (response.status === 200) {
+//                 dispatch({
+//                     type: cartActionTypes.GET_CART_SUCCESS,
+//                     payload: response.data
+//                 })
+//             }
+//         } catch (error) {
+//             dispatch({
+//                 type: cartActionTypes.GET_CART_ERROR
+//             })
+//         }
+//     }
+// }
 
 
 export const addCart = (product) => {
@@ -39,12 +39,12 @@ export const addCart = (product) => {
     }
 }
 
-export const removeCart = (product) => {
+export const removeCart = (addedCartItems) => {
     return async(dispatch) => {
         try {
             dispatch({
                 type: cartActionTypes.REMOVE_CART_SUCCESS,
-                payload: product
+                payload: addedCartItems
             })
         } catch (error) {
             dispatch({
@@ -53,3 +53,34 @@ export const removeCart = (product) => {
         }
     }
 }
+
+export const getImage = (product) => {
+    return async(dispatch) => {
+        try {
+            dispatch({
+                type: cartActionTypes.GET_IMAGE_SUCCESS,
+                payload: product
+            })
+        } catch (error) {
+            dispatch({
+                type: cartActionTypes.GET_IMAGE_ERROR
+            })
+        }
+    }
+}
+
+export const setButton = (id) => {
+    return async(dispatch) => {
+        try {
+            dispatch({
+                type: cartActionTypes.SET_BUTTON_SUCCESS,
+                payload: id
+            })
+        } catch (error) {
+            dispatch({
+                type: cartActionTypes.SET_BUTTON_ERROR
+            })
+        }
+    }
+}
+

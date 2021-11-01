@@ -10,7 +10,7 @@ export const getProduct = () => {
             dispatch({
                 type: productActionTypes.GET_PRODUCT_START
             })
-            const response = await axiosInstance.get(`/products`);
+            const response = await axiosInstance.get('/products');
             if (response.status ===200) {
                 dispatch({
                     type: productActionTypes.GET_PRODUCT_SUCCESS,

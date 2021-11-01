@@ -5,6 +5,7 @@ import CheckOut from "../../Assets/Images/CheckOut/checkout.png"
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCart, removeCart } from '../../Store/Actions/CartProducts/cartAction';
+import Loader from '../../Components/Loader/Loader';
 
 const Cart = () => {
 const [counterone, setCounterOne] = useState(1);
@@ -13,25 +14,11 @@ const [counterone, setCounterOne] = useState(1);
 }
 
 const dispatch = useDispatch();
-// useEffect(() => {
-//     dispatch(getCart());
-// }, [])
 
-// const [cartProducts, setCartProducts] = useState([])
-const removeFromCart = () => {
-    // id, image, description, price
-    // let payload = {
-        // productId: id,
-    //     image: image,
-    //     description: description,
-    //     price: price,
-    // }
-    // let items = [...cartProducts];
-    // items.push(payload);
-    // setCartProducts(items)
+const removeFromCart = (addedCartItems) => {
     dispatch(removeCart(addedCartItems))
 }
-const {loading, addedCartItems } = useSelector((state) => state.cartReducer);
+const {loading, addedCartItems} = useSelector((state) => state.cartReducer);
     return (
         <>
         <Table borderless hover>
@@ -48,19 +35,19 @@ const {loading, addedCartItems } = useSelector((state) => state.cartReducer);
         
         {loading?(
                     <tr>
-                    <th colSpan="6"><h4 style={{textAlign: "center"}}>Loading... <Spinner animation="border" variant="success" /></h4></th>
+                    <th colSpan="6"><Loader/></th>
                     </tr>
                     
         ):(
         <tbody>
-        {addedCartItems.map((data, index) => (
+        {addedCartItems.map((addedCartItems, index) => (
             <tr key={index}>
-                <td>{data.productId}</td>
-                <th style={{textAlign: 'center'}}><Image src={data.image} rounded style={{height: '180px', width: '180px'}}/>
+                <td>{addedCartItems.productId}</td>
+                <th style={{textAlign: 'center'}}><Image src={addedCartItems.image} rounded style={{height: '180px', width: '180px'}}/>
                 <br/>
-                {data.title}
+                {addedCartItems.title}
                 </th>
-                <td>{data.description}</td>
+                <td>{addedCartItems.description}</td>
                 <td>
                 <Button variant="danger" onClick={() => setCounterOne(counterone - 1)} style={{marginRight:'1rem', borderRadius: '25px 0 0 25px'}}>-</Button>
                 {counterone}
@@ -68,8 +55,8 @@ const {loading, addedCartItems } = useSelector((state) => state.cartReducer);
                 <br/>
                 <br/>
                 </td>
-                <td>${data.price}</td>
-                <td><Button variant="danger" style={{borderRadius: '25px', width: '3rem'}} onClick={removeFromCart}><AiFillDelete/></Button></td>
+                <td>${addedCartItems.price}</td>
+                <td><Button variant="danger" style={{borderRadius: '25px', width: '3rem'}} onClick={removeFromCart.bind(null, addedCartItems)}><AiFillDelete/></Button></td>
             </tr>
         ))}
             <tr>

@@ -6,7 +6,7 @@
 }
 .carousel-control-prev-icon, .carousel-control-next-icon  {
         background-color:#198754;
-        ;
+        border-radius: 5px;
 }
 p {
         color: black;

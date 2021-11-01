@@ -5,6 +5,7 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import Badge from '@mui/material/Badge';
 import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
 import logo from '../../Assets/Images/Logo/logo.png'
+import ES from '../../Assets/Images/Logo/ES.png'
 import './AnotherNavbar.css'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux';

@@ -9,14 +9,13 @@ import Home from "./Pages/Home/Home"
 import Cart from "./Pages/Cart/Cart"
 import History from "./Pages/OrderHistory/OrderHistory";
 import CheckOut from "./Pages/CheckOut/CheckOut";
-import reactEcommerceSite from "./Pages/react-ecommerce-site/react-ecommerce-site"
 
 function App() {
 return (
     <> 
     <AnotherNavbar/>
     <Switch>
-      <Route path="/" component={reactEcommerceSite} exact />
+      <Route path="/" component={Home} exact />
       <Route path="/login" component={Login} exact />
       <Route path="/register" component={Register} exact />
       <Route path="/cart" component={Cart} exact />

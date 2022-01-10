@@ -69,7 +69,6 @@ const addToCart = (id ,image, description, price) => {
                                         {`${button.filter(btnList=>btnList.productId===product.id).length>0 ? cartBtnTextTwo : cartBtnTextOne }`}
                                         <ShoppingCartTwoToneIcon style={{height: '1rem', marginTop: '-2.5px'}}/>
                                     </Button>
-                                    .cona
                                 </Card.Body>
                             </Card>
                         </Col>

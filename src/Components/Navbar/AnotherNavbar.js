@@ -17,7 +17,7 @@ const AnotherNavbar = () => {
         <>
         <Navbar className="sticky-top" collapseOnSelect expand="lg" bg="light" variant="light">
             <Container>
-                <Navbar.Brand as={Link} to="/">
+                <Navbar.Brand as={Link} to="/react-ecommerce-site">
                     <img
                     src={logo}
                     width="100rem"

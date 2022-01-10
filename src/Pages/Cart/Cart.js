@@ -8,9 +8,19 @@ import { getCart, removeCart } from '../../Store/Actions/CartProducts/cartAction
 import Loader from '../../Components/Loader/Loader';
 
 const Cart = () => {
-const [counterone, setCounterOne] = useState(1);
-  if(counterone===0) {
-    setCounterOne(1);
+const [counterone, setCounterOne] = useState();
+const increaseCartQuantity = (id) => {
+    // console.log(id, counterone[id]);
+    setCounterOne({
+        ...counterone,
+        [id]: counterone && counterone[id] ? counterone[id] + 1: 1
+    })
+}
+const dercreaseCartQuantity = (id) => {
+    setCounterOne({
+        ...counterone,
+        [id]: counterone && counterone[id] ? counterone[id] - 1: 1
+    })
 }
 
 const dispatch = useDispatch();
@@ -49,9 +59,9 @@ const {loading, addedCartItems} = useSelector((state) => state.cartReducer);
                 </th>
                 <td>{addedCartItems.description}</td>
                 <td>
-                <Button variant="danger" onClick={() => setCounterOne(counterone - 1)} style={{marginRight:'1rem', borderRadius: '25px 0 0 25px'}}>-</Button>
-                {counterone}
-                <Button variant="success" onClick={() => setCounterOne(counterone + 1)} style={{marginLeft:'1rem', borderRadius: '0 25px 25px 0'}}>+</Button>
+                <Button variant="danger" onClick={() => dercreaseCartQuantity(addedCartItems.productId)} style={{marginRight:'1rem', borderRadius: '25px 0 0 25px'}}>-</Button>
+                {(counterone && counterone[addedCartItems.productId]) || 0}
+                <Button variant="success" onClick={() => increaseCartQuantity(addedCartItems.productId)} style={{marginLeft:'1rem', borderRadius: '0 25px 25px 0'}}>+</Button>
                 <br/>
                 <br/>
                 </td>

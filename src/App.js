@@ -21,6 +21,7 @@ return (
       <Route path="/cart" component={Cart} exact />
       <Route path="/orderhistory" component={History} exact />
       <Route path="/checkout" component={CheckOut} exact />
+      <Route path="/react-ecommerce-site" component={Home} exact />
     </Switch>
     {/* <ProtectedRoutes/>
     <AuthRoutes/> */}

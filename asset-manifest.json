@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/react-ecommerce-site/static/css/main.d039ef75.chunk.css",
-    "main.js": "/react-ecommerce-site/static/js/main.22af20b0.chunk.js",
-    "main.js.map": "/react-ecommerce-site/static/js/main.22af20b0.chunk.js.map",
+    "main.js": "/react-ecommerce-site/static/js/main.877230a1.chunk.js",
+    "main.js.map": "/react-ecommerce-site/static/js/main.877230a1.chunk.js.map",
     "runtime-main.js": "/react-ecommerce-site/static/js/runtime-main.b3e613f6.js",
     "runtime-main.js.map": "/react-ecommerce-site/static/js/runtime-main.b3e613f6.js.map",
     "static/css/2.28bb0c3d.chunk.css": "/react-ecommerce-site/static/css/2.28bb0c3d.chunk.css",
@@ -17,6 +17,7 @@
     "static/media/3.9fea91bd.jpg": "/react-ecommerce-site/static/media/3.9fea91bd.jpg",
     "static/media/4.67aa3a3c.jpg": "/react-ecommerce-site/static/media/4.67aa3a3c.jpg",
     "static/media/5.a735047f.jpg": "/react-ecommerce-site/static/media/5.a735047f.jpg",
+    "static/media/ES.0e769c0e.png": "/react-ecommerce-site/static/media/ES.0e769c0e.png",
     "static/media/back.752ec2d6.png": "/react-ecommerce-site/static/media/back.752ec2d6.png",
     "static/media/credit-card-2-front.svg": "/react-ecommerce-site/static/media/credit-card-2-front.7102a645.svg",
     "static/media/envelope.svg": "/react-ecommerce-site/static/media/envelope.97969ee9.svg",
@@ -30,6 +31,6 @@
     "static/css/2.28bb0c3d.chunk.css",
     "static/js/2.4e4c02a7.chunk.js",
     "static/css/main.d039ef75.chunk.css",
-    "static/js/main.22af20b0.chunk.js"
+    "static/js/main.877230a1.chunk.js"
   ]
 }

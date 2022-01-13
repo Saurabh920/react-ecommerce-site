@@ -54,7 +54,7 @@ const OrderHistory = () => {
                 <td></td>
                 <td></td>
                 <th colSpan="5" width="100px" style={{textAlign: 'right'}}>
-                <Link to="/">
+                <Link to="/react-ecommerce-site/">
                 <Button variant="success" style={{borderRadius: '25px', height: '3rem', color: "black"}}>Return To Home <AiFillHome style={{height:'22px', width:'20px', marginTop: '-5px'}}/></Button>
                 </Link>
                 </th>
